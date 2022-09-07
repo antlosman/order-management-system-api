@@ -20,8 +20,7 @@ public class Customer {
     @Column(name = "telephone", nullable = false, columnDefinition = "TEXT")
     private String telephone;
 
-    public Customer(Long registrationCode, String fullName, String email, String telephone) {
-        this.registrationCode = registrationCode;
+    public Customer(String fullName, String email, String telephone) {
         this.fullName = fullName;
         this.email = email;
         this.telephone = telephone;
