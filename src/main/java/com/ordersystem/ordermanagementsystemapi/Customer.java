@@ -9,9 +9,14 @@ public class Customer {
     @Id
     @SequenceGenerator(name = "customer_sequence", sequenceName = "customer_sequence", allocationSize = 1)
     @GeneratedValue(strategy = SEQUENCE, generator = "customer_sequence")
+
+    @Column(name = "registration_code", updatable = false)
     private Long registrationCode;
+    @Column(name = "full_name", nullable = false, columnDefinition = "TEXT")
     private String fullName;
+    @Column(name = "email", nullable = false, columnDefinition = "TEXT", unique = true)
     private String email;
+    @Column(name = "telephone", nullable = false, columnDefinition = "TEXT")
     private String telephone;
 
     public Customer(Long registrationCode, String fullName, String email, String telephone) {
