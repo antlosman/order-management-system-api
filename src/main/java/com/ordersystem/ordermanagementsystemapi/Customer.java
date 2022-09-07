@@ -4,6 +4,7 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Customer")
+@Table(name = "customer", uniqueConstraints = {@UniqueConstraint(name = "customer_email_unique", columnNames = "email")})
 public class Customer {
 
     @Id
@@ -14,7 +15,7 @@ public class Customer {
     private Long registrationCode;
     @Column(name = "full_name", nullable = false, columnDefinition = "TEXT")
     private String fullName;
-    @Column(name = "email", nullable = false, columnDefinition = "TEXT", unique = true)
+    @Column(name = "email", nullable = false, columnDefinition = "TEXT")
     private String email;
     @Column(name = "telephone", nullable = false, columnDefinition = "TEXT")
     private String telephone;
@@ -24,6 +25,10 @@ public class Customer {
         this.fullName = fullName;
         this.email = email;
         this.telephone = telephone;
+    }
+
+    public Customer() {
+
     }
 
     public Long getRegistrationCode() {
