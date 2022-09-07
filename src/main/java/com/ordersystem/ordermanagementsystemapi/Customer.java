@@ -1,12 +1,14 @@
 package com.ordersystem.ordermanagementsystemapi;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import static javax.persistence.GenerationType.SEQUENCE;
 
-@Entity
+@Entity(name = "Customer")
 public class Customer {
 
     @Id
+    @SequenceGenerator(name = "customer_sequence", sequenceName = "customer_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = SEQUENCE, generator = "customer_sequence")
     private Long registrationCode;
     private String fullName;
     private String email;
