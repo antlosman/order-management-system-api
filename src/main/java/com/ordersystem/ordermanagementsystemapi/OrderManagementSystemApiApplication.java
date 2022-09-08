@@ -15,7 +15,9 @@ public class OrderManagementSystemApiApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(CustomerRepository customerRepository) {
+    CommandLineRunner commandLineRunner(
+            CustomerRepository customerRepository,
+            ProductRepository productRepository) {
         return args -> {
 
             Scanner scanner = new Scanner(System.in);
@@ -23,6 +25,7 @@ public class OrderManagementSystemApiApplication {
 
             System.out.println("Make you choice!");
             System.out.println("1 - create a new customer");
+            System.out.println("2 - create a new product");
             String choice = scanner.nextLine();
 
             switch (choice) {
@@ -30,10 +33,11 @@ public class OrderManagementSystemApiApplication {
                     Customer customer = new Customer().createNewCustomer(scanner);
                     customerRepository.save(customer);
                 }
+                case "2" -> {
+                    Product product = new Product().createNewProduct(scanner);
+                    productRepository.save(product);
+                }
             }
-
-
-
 
 
         };

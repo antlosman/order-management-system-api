@@ -2,7 +2,5 @@ package com.ordersystem.ordermanagementsystemapi;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
-
-
+public interface ProductRepository extends JpaRepository<Product, Long> {
 }
