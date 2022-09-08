@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.Scanner;
+
 @SpringBootApplication
 public class OrderManagementSystemApiApplication {
 
@@ -15,9 +17,28 @@ public class OrderManagementSystemApiApplication {
     @Bean
     CommandLineRunner commandLineRunner(CustomerRepository customerRepository) {
         return args -> {
-            Customer maria = new Customer("Maria Jones", "maria@gmail.com", "655655");
-            customerRepository.save(maria);
-        };
-    }
 
+            Scanner scanner = new Scanner(System.in);
+
+
+            System.out.println("Make you choice!");
+            System.out.println("1 - create a new customer");
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1" -> {
+                    Customer customer = new Customer().createNewCustomer(scanner);
+                    customerRepository.save(customer);
+                }
+            }
+
+
+
+
+
+        };
+
+
+
+    }
 }

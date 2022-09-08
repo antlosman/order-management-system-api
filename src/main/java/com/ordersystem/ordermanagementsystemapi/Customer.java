@@ -1,6 +1,8 @@
 package com.ordersystem.ordermanagementsystemapi;
 
 import javax.persistence.*;
+import java.util.Scanner;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Customer")
@@ -25,6 +27,17 @@ public class Customer {
         this.email = email;
         this.telephone = telephone;
     }
+
+    public Customer createNewCustomer(Scanner scanner) {
+        System.out.print("Type customer name: ");
+        String fullName = scanner.nextLine();
+        System.out.print("Type customer email: ");
+        String email = scanner.nextLine();
+        System.out.print("type customer telephone: ");
+        String telephone = scanner.nextLine();
+        return new Customer(fullName, email, telephone);
+    }
+
 
     public Customer() {
 
