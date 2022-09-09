@@ -2,6 +2,8 @@ package com.ordersystem.ordermanagementsystemapi;
 
 
 import javax.persistence.*;
+import java.util.Scanner;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 
@@ -22,6 +24,14 @@ public class OrderLine {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "product_id_fk"))
     private Product product;
+
+    // TODO: 09.09.2022 instead of creating a new Product we need add a Product from DB  
+    public OrderLine createNewOrderLine(Scanner scanner) {
+        Product product = new Product().createNewProduct(scanner);
+        System.out.print("Type order line quantity: ");
+        int quantity = scanner.nextInt();
+        return new OrderLine(quantity, product);
+    }
 
     public OrderLine(Integer quantity) {
         this.quantity = quantity;
