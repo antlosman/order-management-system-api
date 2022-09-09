@@ -22,6 +22,10 @@ public class Product {
     @Column(name = "unit_price", nullable = false)
     private Integer  unitPrice;
 
+
+    @OneToOne(mappedBy = "product", orphanRemoval = true)
+    private OrderLine orderLine;
+
     public Product() {
 
     }
@@ -51,6 +55,14 @@ public class Product {
         this.id = id;
     }
 
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
     public Integer getSkuCode() {
         return skuCode;
     }
@@ -67,10 +79,19 @@ public class Product {
         this.unitPrice = unitPrice;
     }
 
+    public OrderLine getOrderLine() {
+        return orderLine;
+    }
+
+    public void setOrderLine(OrderLine orderLine) {
+        this.orderLine = orderLine;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
+                ", productName='" + productName + '\'' +
                 ", skuCode=" + skuCode +
                 ", unitPrice=" + unitPrice +
                 '}';

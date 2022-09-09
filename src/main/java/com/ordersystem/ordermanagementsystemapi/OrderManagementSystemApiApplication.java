@@ -21,6 +21,9 @@ public class OrderManagementSystemApiApplication {
             OrderLineRepository orderLineRepository) {
         return args -> {
 
+//            orderLineRepository.findById(2L).ifPresent(System.out::println);
+//            productRepository.findById(4L).ifPresent(System.out::println);
+
             Scanner scanner = new Scanner(System.in);
 
 
@@ -44,7 +47,6 @@ public class OrderManagementSystemApiApplication {
                     orderLineRepository.save(orderLine);
 
                 }
-
             }
 
 

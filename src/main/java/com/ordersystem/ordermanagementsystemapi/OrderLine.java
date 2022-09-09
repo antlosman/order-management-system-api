@@ -1,6 +1,8 @@
 package com.ordersystem.ordermanagementsystemapi;
 
 
+import org.aspectj.weaver.ast.Or;
+
 import javax.persistence.*;
 import java.util.Scanner;
 
@@ -33,6 +35,19 @@ public class OrderLine {
         return new OrderLine(quantity, product);
     }
 
+//    public OrderLine createNewOrderLine(Scanner scanner) {
+//        Product product = new Product();
+//        System.out.print("Enter product id: ");
+//        Long productId = scanner.nextLong();
+//        product.setId(productId);
+//        System.out.print("Type order line quantity: ");
+//        int quantity = scanner.nextInt();
+//        OrderLine orderLine = new OrderLine();
+//        orderLine.setProduct(product);
+//        orderLine.setQuantity(quantity);
+//        return orderLine;
+//    }
+
     public OrderLine(Integer quantity) {
         this.quantity = quantity;
     }
@@ -52,5 +67,29 @@ public class OrderLine {
                 ", quantity=" + quantity +
                 ", product=" + product +
                 '}';
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }
