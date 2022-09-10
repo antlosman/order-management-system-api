@@ -2,6 +2,8 @@ package com.ordersystem.ordermanagementsystemapi;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -33,6 +35,29 @@ public class ProductOrder {
             foreignKey = @ForeignKey(name = "customer_registration_code_fk"))
 
     private Customer customer;
+
+    //**********************************************************************
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn(
+            name = "order_line_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "order_line_id_fk")
+    )
+    private List<OrderLine> orderLines = new ArrayList<>();
+
+    public void addOrderLine(OrderLine orderLine) {
+        if (!orderLines.contains(orderLine)) {
+            orderLines.add(orderLine);
+        }
+    }
+
+    public void removeOrderLine(OrderLine orderLine) {
+        if (this.orderLines.contains(orderLine)) {
+            this.orderLines.remove(orderLine);
+        }
+    }
+    //**********************************************************************
+
 
     public ProductOrder() {
     }
