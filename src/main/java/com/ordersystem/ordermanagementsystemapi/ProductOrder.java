@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -37,13 +38,17 @@ public class ProductOrder {
     private Customer customer;
 
     //**********************************************************************
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(
-            name = "order_line_id",
+            name = "product_order_id",
             referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "order_line_id_fk")
+            foreignKey = @ForeignKey(name = "product_order_id_fk")
     )
     private List<OrderLine> orderLines = new ArrayList<>();
+
+    public List<OrderLine> getOrderLines() {
+        return orderLines;
+    }
 
     public void addOrderLine(OrderLine orderLine) {
         if (!orderLines.contains(orderLine)) {
@@ -56,8 +61,6 @@ public class ProductOrder {
             this.orderLines.remove(orderLine);
         }
     }
-    //**********************************************************************
-
 
     public ProductOrder() {
     }
@@ -69,6 +72,14 @@ public class ProductOrder {
     public ProductOrder(LocalDateTime submissionDate, Customer customer) {
         this.submissionDate = submissionDate;
         this.customer = customer;
+    }
+
+    public ProductOrder createNewProductOrder(Scanner scanner) {
+        Customer customer = new Customer().createNewCustomer(scanner);
+        OrderLine orderLine = new OrderLine().createNewOrderLine(scanner);
+        ProductOrder productOrder = new ProductOrder(LocalDateTime.now(), customer);
+        productOrder.addOrderLine(orderLine);
+        return new ProductOrder(LocalDateTime.now(), customer);
     }
 
     public Long getId() {

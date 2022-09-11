@@ -4,6 +4,9 @@ package com.ordersystem.ordermanagementsystemapi;
 import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -14,8 +17,8 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class OrderLine {
 
     @Id
-    @SequenceGenerator(name = "order_line_id_sequence", sequenceName = "order_line_id_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = SEQUENCE, generator = "order_line_id_sequence")
+    @SequenceGenerator(name = "order_line_sequence", sequenceName = "order_line_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = SEQUENCE, generator = "order_line_sequence")
 
     @Column(name = "id", updatable = false)
     private Long id;
@@ -27,7 +30,9 @@ public class OrderLine {
     @JoinColumn(name = "product_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "product_id_fk"))
     private Product product;
 
-    // TODO: 09.09.2022 instead of creating a new Product we need add a Product from DB  
+
+
+    // TODO: 09.09.2022 instead of creating a new Product possibility to add a Product from DB
     public OrderLine createNewOrderLine(Scanner scanner) {
         Product product = new Product().createNewProduct(scanner);
         System.out.print("Type order line quantity: ");
